@@ -24,10 +24,10 @@ def google_search(query, page):
     params   = { 'q': query, 'start': page * 10 }
     resp = requests.get(base_url, params=params, headers=headers)
     soup = bsoup(resp.text, 'html.parser')
-    links  = soup.findAll('cite')
+    links = soup.findAll("div", { "class" : "yuRUbf" })
     result = []
     for link in links:
-        result.append(link.text)
+        result.append(link.find('a').get('href'))
     return result
 
 
